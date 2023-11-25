@@ -1,13 +1,32 @@
+import { useRef } from "react";
 import Input from "./Input";
 
-export default function NewProject() {
+export default function NewProject({ onAdd }) {
+  const title = useRef();
+  const description = useRef();
+  const dueDate = useRef();
+
+  function handleSave() {
+    const enteredTitle = title.current.value;
+    const enteredDescription = description.current.value;
+    const enteredDueDate = dueDate.current.value;
+
+    //validation
+
+    onAdd({
+      title: enteredTitle,
+      description: enteredDescription,
+      dueDate: enteredDueDate,
+    });
+  }
+
   return (
     <>
       <div className="w-[35rem] mt-16">
-        <div >
-          <Input label={"Title"} />
-          <Input label={"Description"} textarea />
-          <Input label={"Due Date"} props={"type=date"} />
+        <div>
+          <Input type= 'text' ref={title} label={"Title"} />
+          <Input ref={description} label={"Description"} textarea />
+          <Input type= 'date' ref={dueDate} label={"Due Date"} props={"type=date"} />
         </div>
         <div>
           <menu className="flex items-center justify-end my-4">
@@ -17,7 +36,7 @@ export default function NewProject() {
               </button>
             </li>
             <li>
-              <button className="mx-2 my-1 px-2 text-white bg-[#776B5D] hover:bg-black rounded-md">
+              <button className="mx-2 my-1 px-2 text-white bg-[#776B5D] hover:bg-black rounded-md" onClick={handleSave}>
                 Create
               </button>
             </li>
