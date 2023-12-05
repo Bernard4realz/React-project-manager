@@ -17,6 +17,7 @@ function App() {
         projectSelectedId: id,
       };
     });
+    console.log(projectsState);
   }
 
   function handleStartAdd() {
@@ -36,7 +37,22 @@ function App() {
     });
   }
 
-  const selectedProject = projectsState.projects.find((project)=> project.id ===projectsState.projectSelectedId)
+  function handleAddProject(projectData) {
+    setProjectsState((prevProjects) => {
+      const projectId = Math.random();
+      const newProject = {
+        ...projectData,
+        id: projectId,
+      };
+      return {
+        ...prevProjects,
+        projectSelectedId: undefined,
+        projects: [prevProjects.projects, newProject],
+      };
+    });
+  };
+
+  const selectedProject = projectsState.projects.find(project=> project.id === projectsState.projectSelectedId)
 
   let content= <SelectedProject project= {selectedProject}/>;
 
@@ -47,21 +63,6 @@ function App() {
   }
   
 
-
-  function handleAddProject(projectData) {
-    setProjectsState((prevProjects) => {
-      const projectId = Math.random();
-      const newProject = {
-        ...projectData,
-        Id: projectId,
-      };
-      return {
-        ...prevProjects,
-        projectSelectedId: undefined,
-        projects: [prevProjects.projects, newProject],
-      };
-    });
-  }
   return (
     <>
       <div className="h-screen my-8 flex gap-8">
