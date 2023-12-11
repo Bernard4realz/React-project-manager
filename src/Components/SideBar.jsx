@@ -5,11 +5,12 @@ export default function SideBar({
   projects,
   onSelectProject,
   selectedId,
+  userName,
 }) {
   return (
     <>
       <aside className="bg-[#776B5D] text-[#EBE3D5] w-1/3 px-8 py-16 md:w-72 rounded-r-xl">
-        <h1 className="mb-8 font-bold uppercase text-white ">Projects</h1>
+        <h1 className="mb-8 font-bold uppercase text-white ">{userName}'s Projects</h1>
         <Button onClick={onStartAddProject}>+ Add Project</Button>
         <ul className="mt-8">
           {projects.map((project) => {
