@@ -7,6 +7,7 @@ import Ele from "./Components/Ele";
 
 function App() {
   const [activeState, setActiveState] = useState(false);
+
   const [projectsState, setProjectsState] = useState({
     projectSelectedId: undefined,
     projects: [],
@@ -73,12 +74,13 @@ function App() {
         ...prevProjects,
         projectSelectedId: undefined,
         projects: [
-          prevProjects.projects.filter(
+          ...prevProjects.projects.filter(
             (project) => project.id !== prevProjects.projectSelectedId
           ),
         ],
       };
     });
+    console.log(projectsState.projects)
   }
 
   function handleAddTask(text) {
